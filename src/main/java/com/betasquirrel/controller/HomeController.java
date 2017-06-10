@@ -2,7 +2,6 @@ package com.betasquirrel.controller;
 
 import com.betasquirrel.model.User;
 import com.betasquirrel.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +18,8 @@ import java.util.List;
 @RequestMapping("/api")
 public class HomeController {
 
-    @Autowired
-    UserService userService;
+
+    private UserService userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public ResponseEntity listAllUsers() {
