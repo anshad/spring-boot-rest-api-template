@@ -1,7 +1,7 @@
 package com.betasquirrel.model;
 
 /**
- * Created by anshad on 10/06/17.
+ * Created by Anshad Vattapoyil on 10/06/17 2:57 PM.
  */
 public class User {
 

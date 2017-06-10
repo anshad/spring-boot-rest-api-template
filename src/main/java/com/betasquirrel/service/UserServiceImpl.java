@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Created by anshad on 10/06/17.
+ * Created by Anshad Vattapoyil on 10/06/17 2:59 PM.
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private static List<User> populateDummyData() {
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
 
         users.add(new User(counter.incrementAndGet(), "Anshad Vattapoyil"));
         users.add(new User(counter.incrementAndGet(), "Riyas Palackal"));
