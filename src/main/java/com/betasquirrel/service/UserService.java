@@ -5,7 +5,7 @@ import com.betasquirrel.model.User;
 import java.util.List;
 
 /**
- * Created by anshad on 10/06/17.
+ * Created by Anshad Vattapoyil on 10/06/17 2:58 PM.
  */
 public interface UserService {
 

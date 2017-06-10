@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Created by anshad on 10/06/17.
+ * Created by Anshad Vattapoyil on 10/06/17 2:58 PM.
  */
+
 @RestController
 @RequestMapping("/api")
 public class HomeController {
@@ -22,11 +23,11 @@ public class HomeController {
     UserService userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> listAllUsers() {
+    public ResponseEntity listAllUsers() {
         List<User> users = userService.findAllUsers();
         if (users.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
