@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
         users = populateDummyData();
     }
 
+    /**
+     * Populate dummy list
+     *
+     * @return
+     */
     private static List<User> populateDummyData() {
         List<User> users = new ArrayList<>();
 
