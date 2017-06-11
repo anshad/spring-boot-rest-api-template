@@ -9,3 +9,12 @@ Setup
 - Run the app using ``mvn spring-boot:run``
 - Browse ``http//localhost:8080/api/v1/users``
 - Create package for deployment using ``mvn package`` (change properties if required)
+
+Table Structure
+---------------
+``CREATE TABLE `users` (
+  `id` bigint(20) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;``
