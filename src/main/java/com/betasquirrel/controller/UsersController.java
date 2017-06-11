@@ -2,9 +2,15 @@ package com.betasquirrel.controller;
 
 import com.betasquirrel.model.User;
 import com.betasquirrel.repository.UserRepository;
+import com.betasquirrel.util.ValidationError;
+import com.betasquirrel.util.ValidationErrorBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -12,6 +18,7 @@ import java.util.List;
  */
 
 @RestController
+@EnableAutoConfiguration
 @RequestMapping("/api/v1/users")
 public class UsersController {
 
@@ -34,7 +41,7 @@ public class UsersController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public List<User> saveUser(@RequestBody final User user) {
+    public List<User> saveUser(@Valid @RequestBody final User user) {
         userRepository.save(user);
         return userRepository.findAll();
     }
@@ -75,5 +82,15 @@ public class UsersController {
     public List<User> deleteUser(@PathVariable("id") Integer userId) {
         userRepository.delete(userId);
         return userRepository.findAll();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ValidationError handleException(MethodArgumentNotValidException exception) {
+        return createValidationError(exception);
+    }
+
+    private ValidationError createValidationError(MethodArgumentNotValidException e) {
+        return ValidationErrorBuilder.fromBindingErrors(e.getBindingResult());
     }
 }

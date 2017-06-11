@@ -1,5 +1,8 @@
 package com.betasquirrel.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 /**
@@ -16,9 +19,11 @@ public class User {
     private Integer id;
 
     @Column(name = "name")
+    @NotBlank(message = "Name should not be blank!")
     private String name;
 
     @Column(name = "email")
+    @Email(message = "Invalid email")
     private String email;
 
     @Column(name = "mobile")
