@@ -74,3 +74,6 @@ API Doc & Sample
     ```
     DELETE /api/v1/users/1
     ```
+Note
+-----
+For getting XML response use ``Accept`` header ``application/xml`` and ``application/json`` for JSON response.
