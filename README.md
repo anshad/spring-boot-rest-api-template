@@ -1,5 +1,5 @@
 # spring-boot-rest-api-template
-Spring boot REST API project template.
+Spring boot REST API project template using jpa (Springboot REST API whch connects MySQL database).
 
 Setup
 -----
@@ -24,3 +24,53 @@ Table Structure
   
 ``ALTER TABLE `users`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;``
+    
+API Doc & Sample
+----------------
+- List all users 
+    ```
+    GET /api/v1/users
+    ```
+- Create new user 
+    ```
+    POST /api/v1/users
+    ```
+
+    Body:
+    ```
+    {
+        "name": "Mark Price",
+        "email": "mark@devslopes.com",
+        "mobile": "0123456789"
+    }
+    ```
+    Content-Type:
+    ```
+    application/json
+    ```
+- Get specific user 
+    ```
+    GET /api/v1/users/1
+    ```
+- Update user
+    ```
+    PUT /api/v1/users
+    ```
+    Body:
+    ```
+    {
+        "id":1,
+        "name": "Jeffrey Way",
+        "email": "jeffrey@laracasts.com",
+        "mobile": "0123456789"
+    }
+    ```
+    
+    Content-Type:
+    ```
+    application/json
+    ```
+- Delete user
+    ```
+    DELETE /api/v1/users/1
+    ```
