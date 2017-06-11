@@ -27,7 +27,7 @@ public class User {
     public User() {
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 

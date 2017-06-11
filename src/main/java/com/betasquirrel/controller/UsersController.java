@@ -51,6 +51,21 @@ public class UsersController {
     }
 
     /**
+     * Find and update a user
+     *
+     * @param user
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.PUT)
+    public User updateUser(@RequestBody final User user) {
+        if (userRepository.exists(user.getId())) {
+            userRepository.updateUser(user.getName(), user.getEmail(), user.getMobile(), user.getId());
+            return userRepository.findOne(user.getId());
+        }
+        return null;
+    }
+
+    /**
      * Delete a user
      *
      * @param userId
@@ -61,5 +76,4 @@ public class UsersController {
         userRepository.delete(userId);
         return userRepository.findAll();
     }
-
 }
