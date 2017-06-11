@@ -25,7 +25,6 @@ public class UsersController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getAllUsers() {
-        System.out.println("hey");
         return userRepository.findAll();
     }
 
@@ -38,6 +37,17 @@ public class UsersController {
     public List<User> saveUser(@RequestBody final User user) {
         userRepository.save(user);
         return userRepository.findAll();
+    }
+
+    /**
+     * Get a specific user
+     *
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public User getUser(@PathVariable("id") Integer userId) {
+        return userRepository.findOne(userId);
     }
 
     /**
