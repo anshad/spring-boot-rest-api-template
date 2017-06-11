@@ -13,8 +13,14 @@ Setup
 Table Structure
 ---------------
 ``CREATE TABLE `users` (
-  `id` bigint(20) NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `mobile` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `mobile` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;``
+
+``ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);``
+  
+``ALTER TABLE `users`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;``
