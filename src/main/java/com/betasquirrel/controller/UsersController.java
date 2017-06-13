@@ -1,5 +1,7 @@
 package com.betasquirrel.controller;
 
+import com.betasquirrel.model.ObjectResponse;
+import com.betasquirrel.model.ListResponse;
 import com.betasquirrel.model.User;
 import com.betasquirrel.repository.UserRepository;
 import com.betasquirrel.util.ValidationError;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -31,19 +34,30 @@ public class UsersController {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public ListResponse getAllUsers(HttpServletResponse http) {
+        ListResponse response = new ListResponse();
+        response.setMessage("Successfully Retrieved");
+        response.setStatusCode(http.getStatus());
+        List<User> users = userRepository.findAll();
+        response.setData(users);
+        return response;
     }
 
     /**
      * Create new user
+     *
      * @param user
      * @return
      */
     @RequestMapping(method = RequestMethod.POST)
-    public List<User> saveUser(@Valid @RequestBody final User user) {
+    public ListResponse saveUser(@Valid @RequestBody final User user, HttpServletResponse http) {
         userRepository.save(user);
-        return userRepository.findAll();
+        ListResponse response = new ListResponse();
+        response.setMessage("Successfully Created");
+        response.setStatusCode(http.getStatus());
+        List<User> users = userRepository.findAll();
+        response.setData(users);
+        return response;
     }
 
     /**
@@ -53,8 +67,13 @@ public class UsersController {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUser(@PathVariable("id") Integer userId) {
-        return userRepository.findOne(userId);
+    public ObjectResponse getUser(@PathVariable("id") Integer userId, HttpServletResponse http) {
+        ObjectResponse response = new ObjectResponse();
+        response.setMessage("Successfully Retrieved");
+        response.setStatusCode(http.getStatus());
+        User user = userRepository.findOne(userId);
+        response.setData(user);
+        return response;
     }
 
     /**
@@ -64,10 +83,14 @@ public class UsersController {
      * @return
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public User updateUser(@RequestBody final User user) {
+    public ObjectResponse updateUser(@RequestBody final User user, HttpServletResponse http) {
         if (userRepository.exists(user.getId())) {
             userRepository.updateUser(user.getName(), user.getEmail(), user.getMobile(), user.getId());
-            return userRepository.findOne(user.getId());
+            ObjectResponse response = new ObjectResponse();
+            response.setMessage("Successfully Updated");
+            response.setStatusCode(http.getStatus());
+            response.setData(userRepository.findOne(user.getId()));
+            return response;
         }
         return null;
     }
@@ -79,9 +102,14 @@ public class UsersController {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public List<User> deleteUser(@PathVariable("id") Integer userId) {
+    public ListResponse deleteUser(@PathVariable("id") Integer userId, HttpServletResponse http) {
         userRepository.delete(userId);
-        return userRepository.findAll();
+        ListResponse response = new ListResponse();
+        response.setMessage("Successfully Deleted");
+        response.setStatusCode(http.getStatus());
+        List<User> users = userRepository.findAll();
+        response.setData(users);
+        return response;
     }
 
     @ExceptionHandler
